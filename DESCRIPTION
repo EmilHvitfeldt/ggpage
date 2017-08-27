@@ -1,0 +1,20 @@
+Package: ggpage
+Type: Package
+Title: Creates Page Layout Visualizations in R
+Version: 0.1.0
+Authors@R: person("Emil", "Hvitfeldt", email = "emilhhvitfeldt@gmail.com", role = c("aut", "cre"))
+Description: This package facilitates the creation of page layout 
+    visualizations in which words are represented as rectangles with sizes
+    relating to the length of the words. Which then is divided in lines and
+    pages for easy overview of up to quite large texts.
+Depends:
+    R (>= 3.0.0)
+Imports:
+    dplyr (>= 0.7.0),
+    ggplot2 (>= 2.0.0),
+    stringr (>= 1.2.0),
+    tidytext (>= 0.1.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
