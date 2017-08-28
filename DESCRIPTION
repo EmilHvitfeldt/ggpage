@@ -8,12 +8,12 @@ Description: This package facilitates the creation of page layout
     relating to the length of the words. Which then is divided in lines and
     pages for easy overview of up to quite large texts.
 Depends:
-    R (>= 3.0.0)
-Imports:
+    R (>= 3.0.0),
     dplyr (>= 0.7.0),
     ggplot2 (>= 2.0.0),
     stringr (>= 1.2.0),
     tidytext (>= 0.1.0)
+Imports:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
