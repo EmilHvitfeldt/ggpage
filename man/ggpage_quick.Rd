@@ -12,7 +12,7 @@ ggpage_quick(book, lpp = 25, character_height = 3, vertical_space = 1,
 \item{book}{Character or data.frame. Can either have each element be a
 seperate line or having each element being seperate words.}
 
-\item{lpp}{Numeric. Lines Per Page. numver of lines allocated for each page.}
+\item{lpp}{Numeric. Lines Per Page. Number of lines allocated for each page.}
 
 \item{character_height}{Numeric. Relative size of the height of each letter
 compared to its width.}

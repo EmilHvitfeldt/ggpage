@@ -7,7 +7,7 @@
 #'
 #' @param book Character or data.frame. Can either have each element be a
 #'   seperate line or having each element being seperate words.
-#' @param lpp Numeric. Lines Per Page. numver of lines allocated for each page.
+#' @param lpp Numeric. Lines Per Page. Number of lines allocated for each page.
 #' @param character_height Numeric. Relative size of the height of each letter
 #'   compared to its width.
 #' @param vertical_space Numeric. Distance between each lines vertically.
