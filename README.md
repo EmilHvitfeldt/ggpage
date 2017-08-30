@@ -87,6 +87,7 @@ And it will nicely with other tidyverse packages
 library(ggpage)
 library(purrr)
 library(gganimate)
+library(tidytext)
 
 prebuild <- tinderbox %>%
   ggpage_build() %>%
