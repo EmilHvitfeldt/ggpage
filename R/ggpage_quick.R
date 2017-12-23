@@ -16,19 +16,29 @@
 #'   columns, otherwise the matrix is filled by rows.
 #' @return A ggplot object with the given visualization.
 #' @examples
+#' \dontrun{
+#' library(tidyverse)
+#' library(tidytext)
+#' library(ggpage)
 #' # quick
 #' ## tibble with full lines
 #' ggpage_quick(tinderbox)
 #' ## vector with full lines
-#' ggpage_quick(tinderbox %>% pull(text))
+#' ggpage_quick(tinderbox %>%
+#'                pull(text))
 #' ## tibble with single words
-#' ggpage_quick(tinderbox %>% unnest_tokens(text, text))
+#' ggpage_quick(tinderbox %>%
+#'                unnest_tokens(text, text))
 #' ## vector with single words
-#' ggpage_quick(tinderbox %>% unnest_tokens(text, text) %>% pull(text))
+#' ggpage_quick(tinderbox %>%
+#'                unnest_tokens(text, text) %>%
+#'                pull(text))
 #'
 #' # nrow and ncol
 #' ggpage_quick(tinderbox, nrow = 2)
 #' ggpage_quick(tinderbox, ncol = 2)
+#' }
+#' @export
 ggpage_quick <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
@@ -40,35 +50,49 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
 
   # Makes strings to tibbles
   if (inherits(book, "character")) {
-    book <- tibble(text = book)
+    book <- tibble::tibble(text = book)
   }
 
   # Makes single words to lines
-  if (book %>% slice(1:25) %>% pull(text) %>% str_detect(" ") %>%
+  if (book %>%
+      dplyr::slice(1:25) %>%
+      dplyr::pull(.data$text) %>%
+      stringr::str_detect(" ") %>%
       mean() < 0.9) {
-    book <- tibble(text = word_to_line(book))
+    book <- tibble::tibble(text = word_to_line(book))
   }
 
   # Data table with full lines needed here
+  n <- NROW(book)
+
   data <- book %>%
-    mutate(index_line = row_number(),
-           page = rep(1:ceiling(n() / lpp), length.out = n(), each = lpp)) %>%
-    group_by(page) %>%
-    mutate(line = row_number()) %>%
-    ungroup() %>%
-    unnest_tokens(output = word, input = text) %>%
-    mutate(word_length = str_length(word)) %>%
-    group_by(index_line) %>%
-    mutate(first_word = lag(line, default = 0) != line,
-           x_space_right = cumsum(word_length + 1) - 1,
-           x_space_left = cumsum(lag(word_length + 1, default = 0))) %>%
-    ungroup()
+    dplyr::mutate(index_line = dplyr::row_number(.data$text),
+                  page = rep(1:ceiling(n / lpp),
+                             length.out = n,
+                             each = lpp)) %>%
+    dplyr::group_by(.data$page) %>%
+    dplyr::mutate(line = dplyr::row_number(.data$text)) %>%
+    dplyr::ungroup() %>%
+    tidytext::unnest_tokens(output = "word", input = "text") %>%
+    dplyr::mutate(word_length = stringr::str_length(.data$word)) %>%
+    dplyr::group_by(.data$index_line) %>%
+    dplyr::mutate(first_word = dplyr::lag(.data$line, default = 0) != .data$line,
+                  x_space_right = cumsum(.data$word_length + 1) - 1,
+                  x_space_left = cumsum(dplyr::lag(.data$word_length + 1,
+                                                   default = 0))) %>%
+    dplyr::ungroup()
 
   # Longest line
-  max_line_length <- book %>% pull(text) %>% str_length() %>% max()
+  max_line_length <- book %>%
+    dplyr::pull(.data$text) %>%
+    stringr::str_length() %>%
+    max()
 
   # Add page spacing
-  num_pages <- data %>% pull(page) %>% n_distinct()
+  num_pages <- data %>%
+    dplyr::pull(.data$page) %>%
+    dplyr::n_distinct()
+
   if (!is.null(nrow) || !is.null(ncol)) {
     if (!is.null(ncol)) {
       n_row_y <- ncol
@@ -83,13 +107,13 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
   }
 
   if (bycol) {
-  page_spacing <- tibble(
+  page_spacing <- tibble::tibble(
     page = 1:num_pages,
     x_page = rep(1:n_row_x, length.out = num_pages, each = n_row_y),
     y_page = rep(1:n_row_y, length.out = num_pages)
     )
   } else {
-    page_spacing <- tibble(
+    page_spacing <- tibble::tibble(
       page = 1:num_pages,
       x_page = rep(1:n_row_x, length.out = num_pages),
       y_page = rep(1:n_row_y, length.out = num_pages, each = n_row_x)
@@ -97,21 +121,21 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
   }
 
   data_1 <- data %>%
-    left_join(page_spacing, by = "page")
+    dplyr::left_join(page_spacing, by = "page")
 
   data_1 %>%
-    ggplot() +
-    geom_rect(aes(xmin = x_space_right + x_page *
+    ggplot2::ggplot() +
+    ggplot2::geom_rect(ggplot2::aes(xmin = data_1$x_space_right + data_1$x_page *
                     (max_line_length + x_space_pages),
-                  xmax = x_space_left + x_page *
+                  xmax = data_1$x_space_left + data_1$x_page *
                     (max_line_length + x_space_pages),
-                  ymin = - line * (character_height + vertical_space) -
-                    y_page * (lpp * (character_height + vertical_space) +
+                  ymin = - data_1$line * (character_height + vertical_space) -
+                    data_1$y_page * (lpp * (character_height + vertical_space) +
                                 y_space_pages),
-                  ymax = - line * (character_height + vertical_space) -
-                    character_height - y_page *
+                  ymax = - data_1$line * (character_height + vertical_space) -
+                    character_height - data_1$y_page *
                     (lpp * (character_height + vertical_space) +
                        y_space_pages))) +
-    coord_fixed(ratio = 1) +
-    theme_void()
+    ggplot2::coord_fixed(ratio = 1) +
+    ggplot2::theme_void()
 }

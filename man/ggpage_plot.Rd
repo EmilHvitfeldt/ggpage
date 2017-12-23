@@ -4,7 +4,7 @@
 \alias{ggpage_plot}
 \title{Creates a visualization from the ggpage_build output}
 \usage{
-ggpage_plot(data, mapping = aes())
+ggpage_plot(data, mapping = ggplot2::aes())
 }
 \arguments{
 \item{data}{data.frame. Expects output from \code{ggpage_build} with
@@ -20,22 +20,26 @@ A ggplot object with the given visualization.
 Creates a visualization from the ggpage_build output
 }
 \examples{
+\dontrun{
+library(tidyverse)
+library(tidytext)
+library(ggpage)
 # build and plot
 ## tibble with full lines
-ggpage_build(tinderbox)) \%>\%
+ggpage_build(tinderbox) \%>\%
   ggpage_plot()
 ## vector with full lines
 ggpage_build(book = tinderbox) \%>\%
-  pull(text)) \%>\%
+  pull(text) \%>\%
   ggpage_plot()
 ## tibble with single words
 ggpage_build(tinderbox) \%>\%
-  unnest_tokens(text, text)) \%>\%
+  unnest_tokens(text, text) \%>\%
   ggpage_plot()
 ## vector with single words
 ggpage_build(tinderbox) \%>\%
   unnest_tokens(text, text) \%>\%
-  pull(text)) \%>\%
+  pull(text) \%>\%
   ggpage_plot()
 
 # nrow and ncol
@@ -48,4 +52,5 @@ ggpage_build(tinderbox, ncol = 2) \%>\%
 ggpage_build(tinderbox) \%>\%
   mutate(word_length = str_length(word)) \%>\%
   ggpage_plot(aes(fill = word_length))
+}
 }

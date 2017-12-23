@@ -54,22 +54,26 @@ construction and plotting we are able to do intermediate analysis which
 can be included in the visualization.
 }
 \examples{
+\dontrun{
+library(tidyverse)
+library(tidytext)
+library(ggpage)
 # build and plot
 ## tibble with full lines
-ggpage_build(tinderbox)) \%>\%
+ggpage_build(tinderbox) \%>\%
   ggpage_plot()
 ## vector with full lines
 ggpage_build(book = tinderbox) \%>\%
-  pull(text)) \%>\%
+  pull(text) \%>\%
   ggpage_plot()
 ## tibble with single words
 ggpage_build(tinderbox) \%>\%
-  unnest_tokens(text, text)) \%>\%
+  unnest_tokens(text, text) \%>\%
   ggpage_plot()
 ## vector with single words
 ggpage_build(tinderbox) \%>\%
   unnest_tokens(text, text) \%>\%
-  pull(text)) \%>\%
+  pull(text) \%>\%
   ggpage_plot()
 
 # nrow and ncol
@@ -82,4 +86,5 @@ ggpage_build(tinderbox, ncol = 2) \%>\%
 ggpage_build(tinderbox) \%>\%
   mutate(word_length = str_length(word)) \%>\%
   ggpage_plot(aes(fill = word_length))
+}
 }

@@ -39,17 +39,26 @@ A ggplot object with the given visualization.
 Creates a quick visualization of the page layout
 }
 \examples{
+\dontrun{
+library(tidyverse)
+library(tidytext)
+library(ggpage)
 # quick
 ## tibble with full lines
 ggpage_quick(tinderbox)
 ## vector with full lines
-ggpage_quick(tinderbox \%>\% pull(text))
+ggpage_quick(tinderbox \%>\%
+               pull(text))
 ## tibble with single words
-ggpage_quick(tinderbox \%>\% unnest_tokens(text, text))
+ggpage_quick(tinderbox \%>\%
+               unnest_tokens(text, text))
 ## vector with single words
-ggpage_quick(tinderbox \%>\% unnest_tokens(text, text) \%>\% pull(text))
+ggpage_quick(tinderbox \%>\%
+               unnest_tokens(text, text) \%>\%
+               pull(text))
 
 # nrow and ncol
 ggpage_quick(tinderbox, nrow = 2)
 ggpage_quick(tinderbox, ncol = 2)
+}
 }

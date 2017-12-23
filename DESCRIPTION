@@ -1,7 +1,7 @@
 Package: ggpage
 Type: Package
 Title: Creates Page Layout Visualizations in R
-Version: 0.1.0
+Version: 0.1.01
 Authors@R: person("Emil", "Hvitfeldt", email = "emilhhvitfeldt@gmail.com", role = c("aut", "cre"))
 Description: This package facilitates the creation of page layout 
     visualizations in which words are represented as rectangles with sizes
@@ -9,11 +9,15 @@ Description: This package facilitates the creation of page layout
     pages for easy overview of up to quite large texts.
 Depends:
     R (>= 3.0.0),
+Imports: 
     dplyr (>= 0.7.0),
     ggplot2 (>= 2.0.0),
-    stringr (>= 1.2.0),
-    tidytext (>= 0.1.0)
-Imports:
+    stringr,
+    tidytext (>= 0.1.0),
+    magrittr,
+    tibble,
+    purrr,
+    rlang
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

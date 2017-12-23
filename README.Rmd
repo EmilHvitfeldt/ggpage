@@ -4,7 +4,7 @@ output: rmarkdown::github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, message = FALSE, 
                       warning = FALSE, error = FALSE, fig.retina = 2,
-                      fig.path = "README-")
+                      fig.path = "man/figures/README-")
 ```
 
 # ggpage
@@ -91,4 +91,4 @@ p <- midbuild %>%
 
 gganimate(p, interval = .2)
 ```
-![](README-gif.gif)
+![](man/figures/README-gif.gif)

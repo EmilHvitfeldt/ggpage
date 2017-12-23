@@ -6,20 +6,24 @@
 #'   handed to internal \code{ggplot} call.
 #' @return A ggplot object with the given visualization.
 #' @examples
+#' \dontrun{
+#' library(tidyverse)
+#' library(tidytext)
+#' library(ggpage)
 #' # build and plot
 #' ## tibble with full lines
-#' ggpage_build(tinderbox)) %>%
+#' ggpage_build(tinderbox) %>%
 #'   ggpage_plot()
 #' ## vector with full lines
-#' ggpage_build(book = tinderbox) %>%
+#' ggpage_build(book = tinderbox %>%
 #'   pull(text)) %>%
 #'   ggpage_plot()
 #' ## tibble with single words
 #' ggpage_build(tinderbox) %>%
-#'   unnest_tokens(text, text)) %>%
+#'   unnest_tokens(text, word) %>%
 #'   ggpage_plot()
 #' ## vector with single words
-#' ggpage_build(tinderbox) %>%
+#' ggpage_build(tinderbox %>%
 #'   unnest_tokens(text, text) %>%
 #'   pull(text)) %>%
 #'   ggpage_plot()
@@ -34,10 +38,13 @@
 #' ggpage_build(tinderbox) %>%
 #'   mutate(word_length = str_length(word)) %>%
 #'   ggpage_plot(aes(fill = word_length))
-ggpage_plot <- function(data, mapping = aes()) {
+#' }
+#' @export
+ggpage_plot <- function(data, mapping = ggplot2::aes()) {
   data %>%
-    ggplot(mapping = mapping) +
-    geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
-    coord_fixed(ratio = 1) +
-    theme_void()
+    ggplot2::ggplot(mapping = mapping) +
+    ggplot2::geom_rect(ggplot2::aes(xmin = data$xmin, xmax = data$xmax,
+                                    ymin = data$ymin, ymax = data$ymax)) +
+    ggplot2::coord_fixed(ratio = 1) +
+    ggplot2::theme_void()
 }

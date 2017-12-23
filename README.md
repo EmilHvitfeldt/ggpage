@@ -50,7 +50,7 @@ For a simple demontration we apply `ggpage_quick` to our `tinderbox` object.
 ggpage_quick(tinderbox)
 ```
 
-<img src="README-unnamed-chunk-3-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="672" />
 
 ``` r
 
@@ -79,7 +79,7 @@ tinderbox %>%
                     name = "Word length")
 ```
 
-<img src="README-unnamed-chunk-5-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="672" />
 
 And it will nicely with other tidyverse packages
 
@@ -87,7 +87,6 @@ And it will nicely with other tidyverse packages
 library(ggpage)
 library(purrr)
 library(gganimate)
-library(tidytext)
 
 prebuild <- tinderbox %>%
   ggpage_build() %>%
@@ -109,4 +108,4 @@ p <- midbuild %>%
 gganimate(p, interval = .2)
 ```
 
-![](README-gif.gif)
+![](man/figures/README-gif.gif)
