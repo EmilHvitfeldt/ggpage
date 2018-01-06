@@ -29,17 +29,17 @@ library(ggpage)
 ggpage_build(tinderbox) \%>\%
   ggpage_plot()
 ## vector with full lines
-ggpage_build(book = tinderbox) \%>\%
-  pull(text) \%>\%
+ggpage_build(book = tinderbox \%>\%
+  pull(text)) \%>\%
   ggpage_plot()
 ## tibble with single words
 ggpage_build(tinderbox) \%>\%
-  unnest_tokens(text, text) \%>\%
+  unnest_tokens(text, word) \%>\%
   ggpage_plot()
 ## vector with single words
-ggpage_build(tinderbox) \%>\%
+ggpage_build(tinderbox \%>\%
   unnest_tokens(text, text) \%>\%
-  pull(text) \%>\%
+  pull(text)) \%>\%
   ggpage_plot()
 
 # nrow and ncol
