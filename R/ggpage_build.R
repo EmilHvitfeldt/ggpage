@@ -21,6 +21,9 @@
 #'   columns, otherwise the matrix is filled by rows.
 #' @param wtl logical. If TRUE will convert single word vector into a vector
 #'   with full lines. (defaults to FALSE).
+#' @param para.fun Function that generates random numbers to determine number
+#'  of word in each paragraph.
+#' @param ... Extra arguments.
 #' @return `tibble` containing the following columns:
 #'
 #'   * `word`: Character. The words of the text.
@@ -72,7 +75,8 @@
 ggpage_build <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
-                         bycol = TRUE, wtl = FALSE) {
+                         bycol = TRUE, wtl = FALSE,
+                         para.fun = NULL, ...) {
 
   if(!any(class(book) %in% c("character", "data.frame"))) {
     stop("Please supply character string or data.frame.")
@@ -94,16 +98,30 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   if(!is.logical(wtl)) stop("wtl must be logical.")
 
   if (any(single_word_check, wtl)) {
-    book <- tibble::tibble(text = word_to_line(book))
+
+    if (is.null(para.fun)) {
+      book <- tibble::tibble(text = word_to_line(book))
+    } else {
+      if(!is.function(para.fun)) stop("wtl must be a function")
+
+      book <- book %>%
+        dplyr::mutate(paragraph_id = para_index(NROW(book), para.fun, ...) %>%
+                                       break_help())
+
+      book <- purrr::map_df(book %>% dplyr::pull(.data$paragraph_id) %>% unique(),
+                     ~ book %>%
+                         dplyr::filter(paragraph_id == .x) %>%
+                         word_to_line() %>%
+                         tibble::tibble(text = .))
+
+    }
   }
 
   # Data table with full lines needed here
-  n <- NROW(book)
-
   data <- book %>%
-    dplyr::mutate(index_line = 1:n,
-                  page = rep(1:ceiling(n / lpp),
-                             length.out = n,
+    dplyr::mutate(index_line = 1:NROW(book),
+                  page = rep(1:ceiling(NROW(book) / lpp),
+                             length.out = NROW(book),
                              each = lpp)) %>%
     dplyr::group_by(.data$page) %>%
     dplyr::mutate(line = dplyr::row_number(.data$text)) %>%

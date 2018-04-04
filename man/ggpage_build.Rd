@@ -6,7 +6,7 @@
 \usage{
 ggpage_build(book, lpp = 25, character_height = 3, vertical_space = 1,
   x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE)
+  bycol = TRUE, wtl = FALSE, para.fun = NULL, ...)
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a
@@ -29,8 +29,16 @@ layout.}
 \item{ncol}{Numeric. Number of columns of pages, if omitted defaults to
 square layout.}
 
-\item{bycol}{Logical.  If TRUE (the default) the matrix is filled by
+\item{bycol}{Logical. If TRUE (the default) the matrix is filled by
 columns, otherwise the matrix is filled by rows.}
+
+\item{wtl}{logical. If TRUE will convert single word vector into a vector
+with full lines. (defaults to FALSE).}
+
+\item{para.fun}{Function that generates random numbers to determine number
+of word in each paragraph.}
+
+\item{...}{Extra arguments.}
 }
 \value{
 `tibble` containing the following columns:

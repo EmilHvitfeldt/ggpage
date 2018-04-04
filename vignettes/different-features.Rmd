@@ -1,0 +1,40 @@
+---
+title: "ggpage features"
+author: "Emil Hvitfeldt"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggpage features}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Variable paragraph length
+
+The `ggpage` package allows for variable length of paragraphs if the text doesn't hold information regarding paragraphs. This is done by supplying the `variable.paragraph.length` argument in `ggpage_build` with a function that generate random natural numbers. Such as the `rpois` function.
+
+```{r, message=FALSE}
+library(magrittr)
+library(dplyr)
+library(ggpage)
+
+book <- tinderbox %>%
+  tidytext::unnest_tokens(text, text)
+
+ggpage_build(book, para.fun = rpois, lambda = 75) %>%
+  ggpage_plot()
+ggpage_build(book, para.fun = rpois, lambda = 75) %>%
+  ggpage_plot()
+ggpage_build(book, para.fun = rpois, lambda = 500) %>%
+  ggpage_plot()
+ggpage_build(book, para.fun = rpois, lambda = 500) %>%
+  ggpage_plot()
+```
+

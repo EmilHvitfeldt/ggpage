@@ -7,7 +7,8 @@
 word_to_line(words, wot_number = 1000)
 }
 \arguments{
-\item{words}{Character. Having each element being seperate words.}
+\item{words}{data.frame. Where each row is a seperate word words with the
+column name text.}
 
 \item{wot_number}{Numeric. how many words to split whole string by.}
 }
@@ -15,6 +16,6 @@ word_to_line(words, wot_number = 1000)
 Character. have each element be a seperate line.
 }
 \description{
-Internal function for converting words to lines
+extents the str_wrap() function from the stringr pacakge to work with longer
+strings.
 }
-\keyword{internal}
