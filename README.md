@@ -83,7 +83,7 @@ tinderbox %>%
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="672" />
 
-And it will nicely with other tidyverse packages
+And it will work nicely with other tidyverse packages
 
 ``` r
 library(ggpage)
