@@ -2,6 +2,8 @@
 ggpage
 ======
 
+[![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage)
+
 `ggpage` is a package to create pagestyled visualizations of text based data. It uses ggplot2 and final returns are ggplot2 objects.
 
 Installation
@@ -20,23 +22,23 @@ Example
 The package includes The Tinder-box by H.C. Andersen for examples.
 
 ``` r
+library(tidyverse)
 library(ggpage)
 
 head(tinderbox, 10)
 ## # A tibble: 10 x 2
-##                                                                           text
-##                                                                          <chr>
-##  1 "A soldier came marching along the high road: \"Left, right - left, right.\
-##  2 had his knapsack on his back, and a sword at his side; he had been to the w
-##  3 and was now returning home. As he walked on, he met a very frightful-lookin
-##  4 witch in the road. Her under-lip hung quite down on her breast, and she sto
-##  5 "and said, \"Good evening, soldier; you have a very fine sword, and a large
-##  6 knapsack, and you are a real soldier; so you shall have as much money as ev
-##  7                                                               "you like.\""
-##  8                               "\"Thank you, old witch,\" said the soldier."
-##  9 "\"Do you see that large tree,\" said the witch, pointing to a tree which s
-## 10 "beside them. \"Well, it is quite hollow inside, and you must climb to the 
-## # ... with 1 more variables: book <chr>
+##    text                                                        book       
+##    <chr>                                                       <chr>      
+##  1 "A soldier came marching along the high road: \"Left, righ… The tinder…
+##  2 had his knapsack on his back, and a sword at his side; he … The tinder…
+##  3 and was now returning home. As he walked on, he met a very… The tinder…
+##  4 witch in the road. Her under-lip hung quite down on her br… The tinder…
+##  5 "and said, \"Good evening, soldier; you have a very fine s… The tinder…
+##  6 knapsack, and you are a real soldier; so you shall have as… The tinder…
+##  7 "you like.\""                                               The tinder…
+##  8 "\"Thank you, old witch,\" said the soldier."               The tinder…
+##  9 "\"Do you see that large tree,\" said the witch, pointing … The tinder…
+## 10 "beside them. \"Well, it is quite hollow inside, and you m… The tinder…
 ```
 
 The basic workflow with ggpage is using either

@@ -27,6 +27,7 @@ devtools::install_github("EmilHvitfeldt/ggpage")
 The package includes The Tinder-box by H.C. Andersen for examples.
 
 ```{r}
+library(tidyverse)
 library(ggpage)
 
 head(tinderbox, 10)
