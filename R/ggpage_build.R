@@ -17,8 +17,10 @@
 #'   layout.
 #' @param ncol Numeric. Number of columns of pages, if omitted defaults to
 #'   square layout.
-#' @param bycol Logical.  If TRUE (the default) the matrix is filled by
+#' @param bycol Logical. If TRUE (the default) the matrix is filled by
 #'   columns, otherwise the matrix is filled by rows.
+#' @param wtl logical. If TRUE will convert single word vector into a vector
+#'   with full lines. (defaults to FALSE).
 #' @return `tibble` containing the following columns:
 #'
 #'   * `word`: Character. The words of the text.
@@ -70,7 +72,7 @@
 ggpage_build <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
-                         bycol = TRUE) {
+                         bycol = TRUE, wtl = FALSE) {
 
   if(!any(class(book) %in% c("character", "data.frame"))) {
     stop("Please supply character string or data.frame.")
@@ -82,11 +84,16 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   }
 
   # Makes single words to lines
-  if (book %>%
-      dplyr::slice(1:25) %>%
-      dplyr::pull(.data$text) %>%
-      stringr::str_detect(" ") %>%
-      mean() < 0.9) {
+  single_word_check <- book %>%
+    dplyr::slice(1:25) %>%
+    dplyr::pull(.data$text) %>%
+    trimws("both") %>%
+    stringr::str_detect(" ") %>%
+    mean() < 0.9
+
+  if(!is.logical(wtl)) stop("wtl must be logical.")
+
+  if (any(single_word_check, wtl)) {
     book <- tibble::tibble(text = word_to_line(book))
   }
 
