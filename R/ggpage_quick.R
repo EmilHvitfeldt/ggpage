@@ -66,12 +66,12 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
   n <- NROW(book)
 
   data <- book %>%
-    dplyr::mutate(index_line = dplyr::row_number(.data$text),
+    dplyr::mutate(index_line = dplyr::row_number(),
                   page = rep(1:ceiling(n / lpp),
                              length.out = n,
                              each = lpp)) %>%
     dplyr::group_by(.data$page) %>%
-    dplyr::mutate(line = dplyr::row_number(.data$text)) %>%
+    dplyr::mutate(line = dplyr::row_number()) %>%
     dplyr::ungroup() %>%
     tidytext::unnest_tokens(output = "word", input = "text") %>%
     dplyr::mutate(word_length = stringr::str_length(.data$word)) %>%

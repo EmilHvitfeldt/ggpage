@@ -38,3 +38,23 @@ ggpage_build(book, para.fun = rpois, lambda = 500) %>%
   ggpage_plot()
 ```
 
+### show paper
+
+```{r}
+ggpage_build(tinderbox) %>%
+  ggpage_plot(paper.show = TRUE)
+```
+
+```{r}
+ggpage_build(tinderbox) %>%
+  ggpage_plot(paper.show = TRUE, paper.color = "pink")
+```
+
+```{r}
+ggpage_build(tinderbox) %>%
+  ggpage_plot(paper.show = TRUE, paper.color = rainbow(9), paper.alpha = 0.3)
+```
+
+
+
+

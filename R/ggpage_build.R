@@ -123,9 +123,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                   page = rep(1:ceiling(NROW(book) / lpp),
                              length.out = NROW(book),
                              each = lpp)) %>%
-    dplyr::group_by(.data$page) %>%
-    dplyr::mutate(line = dplyr::row_number(.data$text)) %>%
-    dplyr::ungroup() %>%
+    page_liner() %>%
     tidytext::unnest_tokens(output = "word", input = "text") %>%
     dplyr::mutate(word_length = stringr::str_length(.data$word)) %>%
     dplyr::group_by(.data$index_line) %>%

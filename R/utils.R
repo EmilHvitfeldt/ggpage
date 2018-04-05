@@ -60,3 +60,35 @@ break_help <- function(x) {
     purrr::map2(x, 1:length(x), ~ rep(.y, .x))
   )
 }
+
+#' Identify the egdes of the paper of each page
+#'
+#' @param data data.frame created by ggpage_build.
+#' @return data.frame,
+#' @examples
+#' paper_shape(ggpage_build(tinderbox))
+#' @export
+paper_shape <- function(data) {
+  dplyr::group_by(data, .data$page) %>%
+    dplyr::summarise(xmin = max(.data$xmin),
+                     xmax = min(.data$xmax),
+                     ymin = max(.data$ymin),
+                     ymax = min(.data$ymax))
+}
+
+#' Add line number within pages
+#'
+#' @param data data.frame
+#' @return data.frame
+#' @export
+page_liner <- function(data) {
+  line <- data %>%
+    dplyr::group_by(.data$page) %>%
+    dplyr::tally() %>%
+    dplyr::pull(.data$n) %>%
+    purrr::map(~ seq_len(.x)) %>%
+    unlist()
+
+  data %>%
+    dplyr::mutate(line)
+}

@@ -4,7 +4,8 @@
 \alias{ggpage_plot}
 \title{Creates a visualization from the ggpage_build output}
 \usage{
-ggpage_plot(data, mapping = ggplot2::aes())
+ggpage_plot(data, mapping = ggplot2::aes(), paper.show = FALSE,
+  paper.color = "grey90", paper.alpha = 1, paper.limits = 3)
 }
 \arguments{
 \item{data}{data.frame. Expects output from \code{ggpage_build} with
@@ -12,6 +13,17 @@ optional intermediate analysis.}
 
 \item{mapping}{Default list of aesthetic mappings to use for plot to be
 handed to internal \code{ggplot} call.}
+
+\item{paper.show}{Shows the paper underneigt the text.}
+
+\item{paper.color}{Color of the pages. Needs to be of length 1 or the same
+as the number of pages.}
+
+\item{paper.alpha}{Alpha of the pages. Needs to be of length 1 or the same
+as the number of pages.}
+
+\item{paper.limits}{Numerical.Extends the egdes of the paper in all
+directions.}
 }
 \value{
 A ggplot object with the given visualization.
