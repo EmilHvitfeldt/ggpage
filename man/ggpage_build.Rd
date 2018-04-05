@@ -41,7 +41,7 @@ of word in each paragraph.}
 \item{...}{Extra arguments.}
 }
 \value{
-`tibble` containing the following columns:
+`data.frame` containing the following columns:
 
   * `word`: Character. The words of the text.
   * `page`: Integer. Page number.
@@ -67,14 +67,14 @@ library(tidyverse)
 library(tidytext)
 library(ggpage)
 # build and plot
-## tibble with full lines
+## data.frame with full lines
 ggpage_build(tinderbox) \%>\%
   ggpage_plot()
 ## vector with full lines
 ggpage_build(book = tinderbox \%>\%
   pull(text)) \%>\%
   ggpage_plot()
-## tibble with single words
+## data.frame with single words
 ggpage_build(tinderbox) \%>\%
   unnest_tokens(text, word) \%>\%
   ggpage_plot()

@@ -15,7 +15,6 @@ Imports:
     stringr,
     tidytext (>= 0.1.0),
     magrittr,
-    tibble,
     purrr,
     rlang
 License: MIT + file LICENSE

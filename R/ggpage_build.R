@@ -24,7 +24,7 @@
 #' @param para.fun Function that generates random numbers to determine number
 #'  of word in each paragraph.
 #' @param ... Extra arguments.
-#' @return `tibble` containing the following columns:
+#' @return `data.frame` containing the following columns:
 #'
 #'   * `word`: Character. The words of the text.
 #'   * `page`: Integer. Page number.
@@ -43,14 +43,14 @@
 #' library(tidytext)
 #' library(ggpage)
 #' # build and plot
-#' ## tibble with full lines
+#' ## data.frame with full lines
 #' ggpage_build(tinderbox) %>%
 #'   ggpage_plot()
 #' ## vector with full lines
 #' ggpage_build(book = tinderbox %>%
 #'   pull(text)) %>%
 #'   ggpage_plot()
-#' ## tibble with single words
+#' ## data.frame with single words
 #' ggpage_build(tinderbox) %>%
 #'   unnest_tokens(text, word) %>%
 #'   ggpage_plot()
@@ -82,9 +82,9 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     stop("Please supply character string or data.frame.")
   }
 
-  # Makes strings to tibbles
+  # Makes strings to data.frames
   if (inherits(book, "character")) {
-    book <- tibble::tibble(text = book)
+    book <- data.frame(text = book)
   }
 
   # Makes single words to lines
@@ -100,7 +100,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   if (any(single_word_check, wtl)) {
 
     if (is.null(para.fun)) {
-      book <- tibble::tibble(text = word_to_line(book))
+      book <- data.frame(text = word_to_line(book))
     } else {
       if(!is.function(para.fun)) stop("wtl must be a function")
 
@@ -112,7 +112,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                      ~ book %>%
                          dplyr::filter(paragraph_id == .x) %>%
                          word_to_line() %>%
-                         tibble::tibble(text = .))
+                         data.frame(text = .))
 
     }
   }
@@ -160,13 +160,13 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   }
 
   if (bycol) {
-    page_spacing <- tibble::tibble(
+    page_spacing <- data.frame(
       page = 1:num_pages,
       x_page = rep(1:n_row_x, length.out = num_pages, each = n_row_y),
       y_page = rep(1:n_row_y, length.out = num_pages)
     )
   } else {
-    page_spacing <- tibble::tibble(
+    page_spacing <- data.frame(
       page = 1:num_pages,
       x_page = rep(1:n_row_x, length.out = num_pages),
       y_page = rep(1:n_row_y, length.out = num_pages, each = n_row_x)

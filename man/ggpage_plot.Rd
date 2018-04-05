@@ -25,14 +25,14 @@ library(tidyverse)
 library(tidytext)
 library(ggpage)
 # build and plot
-## tibble with full lines
+## data.frame with full lines
 ggpage_build(tinderbox) \%>\%
   ggpage_plot()
 ## vector with full lines
 ggpage_build(book = tinderbox \%>\%
   pull(text)) \%>\%
   ggpage_plot()
-## tibble with single words
+## data.frame with single words
 ggpage_build(tinderbox) \%>\%
   unnest_tokens(text, word) \%>\%
   ggpage_plot()

@@ -21,12 +21,12 @@
 #' library(tidytext)
 #' library(ggpage)
 #' # quick
-#' ## tibble with full lines
+#' ## data.frame with full lines
 #' ggpage_quick(tinderbox)
 #' ## vector with full lines
 #' ggpage_quick(tinderbox %>%
 #'                pull(text))
-#' ## tibble with single words
+#' ## data.frame with single words
 #' ggpage_quick(tinderbox %>%
 #'                unnest_tokens(text, text))
 #' ## vector with single words
@@ -48,9 +48,9 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
     stop("Please supply character string or data.frame.")
   }
 
-  # Makes strings to tibbles
+  # Makes strings to data.frames
   if (inherits(book, "character")) {
-    book <- tibble::tibble(text = book)
+    book <- data.frame(text = book)
   }
 
   # Makes single words to lines
@@ -59,7 +59,7 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
       dplyr::pull(.data$text) %>%
       stringr::str_detect(" ") %>%
       mean() < 0.9) {
-    book <- tibble::tibble(text = word_to_line(book))
+    book <- data.frame(text = word_to_line(book))
   }
 
   # Data table with full lines needed here
@@ -107,13 +107,13 @@ ggpage_quick <- function(book, lpp = 25, character_height = 3,
   }
 
   if (bycol) {
-  page_spacing <- tibble::tibble(
+  page_spacing <- data.frame(
     page = 1:num_pages,
     x_page = rep(1:n_row_x, length.out = num_pages, each = n_row_y),
     y_page = rep(1:n_row_y, length.out = num_pages)
     )
   } else {
-    page_spacing <- tibble::tibble(
+    page_spacing <- data.frame(
       page = 1:num_pages,
       x_page = rep(1:n_row_x, length.out = num_pages),
       y_page = rep(1:n_row_y, length.out = num_pages, each = n_row_x)
