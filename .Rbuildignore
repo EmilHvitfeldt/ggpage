@@ -3,3 +3,4 @@
 README.Rmd
 ^\.travis\.yml$
 ^data-raw$
+^codecov\.yml$
