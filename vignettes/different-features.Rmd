@@ -25,6 +25,7 @@ library(magrittr)
 library(dplyr)
 library(ggpage)
 
+
 book <- tinderbox %>%
   tidytext::unnest_tokens(text, text)
 
@@ -38,7 +39,7 @@ ggpage_build(book, para.fun = rpois, lambda = 500) %>%
   ggpage_plot()
 ```
 
-### Show paper
+## Show paper
 
 ```{r}
 ggpage_build(tinderbox) %>%
@@ -55,7 +56,7 @@ ggpage_build(tinderbox) %>%
   ggpage_plot(paper.show = TRUE, paper.color = rainbow(9), paper.alpha = 0.3)
 ```
 
-### Show page number
+## Show page number
 
 ```{r}
 directions <- c("top", "top-right", "right", "bottom-right", "bottom",
@@ -81,7 +82,7 @@ ggpage_build(tinderbox) %>%
 
 
 
-### Variable page length
+## Variable page length
 
 ```{r}
 tinderbox %>%
@@ -90,7 +91,7 @@ tinderbox %>%
   ggpage_plot()
 ```
 
-### Centering
+## Centering
 
 ```{r}
 ggpage_build(tinderbox, align = "right") %>%
@@ -100,8 +101,11 @@ ggpage_build(tinderbox, align = "both") %>%
   ggpage_plot()
 ```
 
+## Paragraph to line
 
-
+```{r}
+nest_paragraphs(tinderbox_paragraph, text)
+```
 
 
 

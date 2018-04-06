@@ -6,7 +6,7 @@
 \usage{
 ggpage_build(book, lpp = 25, character_height = 3, vertical_space = 1,
   x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE, wtl = FALSE, para.fun = NULL, page.col = NULL,
+  bycol = TRUE, wtl = NULL, para.fun = NULL, page.col = NULL,
   align = "left", line.max = 80, ...)
 }
 \arguments{

@@ -12,3 +12,16 @@
 #'   ...
 #' }
 "tinderbox"
+
+#' The tinder-box by H.C. Andersen
+#'
+#' A tidy data.frame containing the entire story of The tinder-box by H.C.
+#' Andersen with two columns: \code{text} which contains the text of the
+#' fairy tale divided into paragraphs.
+#'
+#' @format A data frame with 11 rows and 1 variables:
+#' \describe{
+#'   \item{text}{character string up to 80 characters each}
+#'   ...
+#' }
+"tinderbox_paragraph"

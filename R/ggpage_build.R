@@ -78,7 +78,7 @@
 ggpage_build <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
-                         bycol = TRUE, wtl = FALSE,
+                         bycol = TRUE, wtl = NULL,
                          para.fun = NULL, page.col = NULL, align = "left",
                          line.max = 80,
                          ...) {
@@ -102,9 +102,9 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     stringr::str_detect(" ") %>%
     mean() < 0.9
 
-  if(!is.logical(wtl)) stop("wtl must be logical.")
+  if(is.null(wtl)) wtl <- single_word_check
 
-  if (any(single_word_check, wtl)) {
+  if (wtl) {
 
     if (is.null(para.fun)) {
       book <- data.frame(text = word_to_line(book), stringsAsFactors = FALSE)
