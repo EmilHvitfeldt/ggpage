@@ -5,7 +5,8 @@
 \title{Creates a visualization from the ggpage_build output}
 \usage{
 ggpage_plot(data, mapping = ggplot2::aes(), paper.show = FALSE,
-  paper.color = "grey90", paper.alpha = 1, paper.limits = 3)
+  paper.color = "grey90", paper.alpha = 1, paper.limits = 3,
+  page.number = character(1), page.number.x = 3, page.number.y = 3)
 }
 \arguments{
 \item{data}{data.frame. Expects output from \code{ggpage_build} with
@@ -24,6 +25,14 @@ as the number of pages.}
 
 \item{paper.limits}{Numerical.Extends the egdes of the paper in all
 directions.}
+
+\item{page.number}{Position of the page number. Defaults to none.}
+
+\item{page.number.x}{Distance the page number is pushed away from the text
+along the x-axis.}
+
+\item{page.number.y}{Distance the page number is pushed away from the text
+along the y-axis.}
 }
 \value{
 A ggplot object with the given visualization.

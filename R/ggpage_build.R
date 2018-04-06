@@ -84,7 +84,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
 
   # Makes strings to data.frames
   if (inherits(book, "character")) {
-    book <- data.frame(text = book)
+    book <- data.frame(text = book, stringsAsFactors = FALSE)
   }
 
   # Makes single words to lines
@@ -100,7 +100,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   if (any(single_word_check, wtl)) {
 
     if (is.null(para.fun)) {
-      book <- data.frame(text = word_to_line(book))
+      book <- data.frame(text = word_to_line(book), stringsAsFactors = FALSE)
     } else {
       if(!is.function(para.fun)) stop("wtl must be a function")
 
@@ -112,7 +112,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                      ~ book %>%
                          dplyr::filter(paragraph_id == .x) %>%
                          word_to_line() %>%
-                         data.frame(text = .))
+                         data.frame(text = ., stringsAsFactors = FALSE))
 
     }
   }

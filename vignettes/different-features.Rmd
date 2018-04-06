@@ -38,7 +38,7 @@ ggpage_build(book, para.fun = rpois, lambda = 500) %>%
   ggpage_plot()
 ```
 
-### show paper
+### Show paper
 
 ```{r}
 ggpage_build(tinderbox) %>%
@@ -55,6 +55,28 @@ ggpage_build(tinderbox) %>%
   ggpage_plot(paper.show = TRUE, paper.color = rainbow(9), paper.alpha = 0.3)
 ```
 
+### Show page number
 
+```{r}
+directions <- c("top", "top-right", "right", "bottom-right", "bottom",
+                "bottom-left", "left", "top-left")
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[1])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[2])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[3])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[4])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[5])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[6])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[7])
+ggpage_build(tinderbox) %>%
+  ggpage_plot(page.number = directions[8])
+
+```
 
 
