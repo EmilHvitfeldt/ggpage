@@ -28,18 +28,19 @@
 #' @param line.max Maximal number of characters per line. Defaults to 80.
 #' @param ... Extra arguments.
 #' @return `data.frame` containing the following columns:
-#'
-#'   * `word`: Character. The words of the text.
-#'   * `page`: Integer. Page number.
-#'   * `line`: Integer. Line number within the page.
-#'   * `xmin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+#' \itemize{
+#'   \item `word`: Character. The words of the text.
+#'   \item `page`: Integer. Page number.
+#'   \item `line`: Integer. Line number within the page.
+#'   \item `xmin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
 #'     alter.
-#'   * `xmax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+#'   \item `xmax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
 #'     alter.
-#'   * `ymin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+#'   \item `ymin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
 #'     alter.
-#'   * `ymax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+#'   \item `ymax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
 #'     alter.
+#'     }
 #' @examples
 #' \dontrun{
 #' library(tidyverse)

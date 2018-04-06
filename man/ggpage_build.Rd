@@ -49,18 +49,19 @@ of word in each paragraph.}
 }
 \value{
 `data.frame` containing the following columns:
-
-  * `word`: Character. The words of the text.
-  * `page`: Integer. Page number.
-  * `line`: Integer. Line number within the page.
-  * `xmin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+\itemize{
+  \item `word`: Character. The words of the text.
+  \item `page`: Integer. Page number.
+  \item `line`: Integer. Line number within the page.
+  \item `xmin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
     alter.
-  * `xmax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+  \item `xmax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
     alter.
-  * `ymin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+  \item `ymin`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
     alter.
-  * `ymax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
+  \item `ymax`: Numeric. Border of rectangle, used by \code{ggpage_plot} do not
     alter.
+    }
 }
 \description{
 This function can be used in combination with \code{ggpage_plot} to get the
