@@ -89,5 +89,20 @@ tinderbox %>%
   ggpage_build(page.col = "hey", lpp = 10) %>%
   ggpage_plot()
 ```
+
+### Centering
+
+```{r}
+ggpage_build(tinderbox, align = "right") %>%
+  ggpage_plot()
+
+ggpage_build(tinderbox, align = "both") %>%
+  ggpage_plot()
 ```
+
+
+
+
+
+
 

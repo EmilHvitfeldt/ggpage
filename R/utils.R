@@ -92,3 +92,34 @@ page_liner <- function(data) {
   data %>%
     dplyr::mutate(line)
 }
+
+#' Adjust lines
+#'
+#' @param line data.frame
+#' @param max_length numerical. number of letters allowed on a line.
+#' @param type Type of line alignment. Must be one of "left", "right" or "both".
+#' @return data.frame
+#' @export
+line_align <- function(line, max_length, type) {
+
+  line_length <- abs(max(line$xmin) - min(line$xmax))
+  n_words <- NROW(line)
+
+  adjust <- 0
+
+  if(n_words > 1) {
+    if(type == "both") {
+      adjust <- c(0, (max_length - line_length) / (n_words - 1) * seq_len(n_words - 1))
+    }
+  }
+    if(type == "right") {
+      adjust <- max_length - line_length
+    }
+    if(type == "left") {
+      adjust <- 0
+    }
+    line$xmax <- line$xmax + adjust
+    line$xmin <- line$xmin + adjust
+
+  line
+}

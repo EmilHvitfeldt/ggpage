@@ -6,7 +6,8 @@
 \usage{
 ggpage_build(book, lpp = 25, character_height = 3, vertical_space = 1,
   x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE, wtl = FALSE, para.fun = NULL, page.col = NULL, ...)
+  bycol = TRUE, wtl = FALSE, para.fun = NULL, page.col = NULL,
+  align = "left", line.max = 80, ...)
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a
@@ -39,6 +40,10 @@ with full lines. (defaults to FALSE).}
 of word in each paragraph.}
 
 \item{page.col}{column to split the pages by.}
+
+\item{align}{Type of line alignment. Must be one of "left", "right" or "both".}
+
+\item{line.max}{Maximal number of characters per line. Defaults to 80.}
 
 \item{...}{Extra arguments.}
 }

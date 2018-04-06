@@ -24,6 +24,8 @@
 #' @param para.fun Function that generates random numbers to determine number
 #'  of word in each paragraph.
 #' @param page.col column to split the pages by.
+#' @param align Type of line alignment. Must be one of "left", "right" or "both".
+#' @param line.max Maximal number of characters per line. Defaults to 80.
 #' @param ... Extra arguments.
 #' @return `data.frame` containing the following columns:
 #'
@@ -77,7 +79,9 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
                          bycol = TRUE, wtl = FALSE,
-                         para.fun = NULL, page.col = NULL, ...) {
+                         para.fun = NULL, page.col = NULL, align = "left",
+                         line.max = 80,
+                         ...) {
 
   if(!any(class(book) %in% c("character", "data.frame"))) {
     stop("Please supply character string or data.frame.")
@@ -184,7 +188,8 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     )
   }
 
-  data %>% dplyr::left_join(page_spacing, by = "page") %>%
+  data <- data %>%
+    dplyr::left_join(page_spacing, by = "page") %>%
     dplyr::mutate(
       xmin = .data$x_space_right + .data$x_page * (max_line_length + x_space_pages),
       xmax = .data$x_space_left + .data$x_page * (max_line_length + x_space_pages),
@@ -197,4 +202,11 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                   -.data$x_space_right, -.data$x_space_left, -.data$x_page,
                   -.data$y_page) %>%
     dplyr::select(.data$word, dplyr::everything())
+
+  # Text alignment
+  data %>%
+    dplyr::mutate(index_line = stringr::str_c(.data$page, .data$line, sep = "-")) %>%
+    dplyr::group_by(.data$index_line) %>%
+    dplyr::do(line_align(., line.max, align)) %>%
+    dplyr::ungroup()
 }
