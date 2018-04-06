@@ -2,9 +2,14 @@
 ggpage
 ======
 
-[![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage)
+[![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage) [![Coverage status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg)](https://codecov.io/github/EmilHvitfeldt/ggpage?branch=master)
 
 `ggpage` is a package to create pagestyled visualizations of text based data. It uses ggplot2 and final returns are ggplot2 objects.
+
+Version 0.2.0
+-------------
+
+In this new version I have worked to include a lot of use cases that wasn't available in the first version. These new elements are previewed in the vignette.
 
 Installation
 ------------
