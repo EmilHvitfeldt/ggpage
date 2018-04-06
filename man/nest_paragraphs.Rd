@@ -4,12 +4,14 @@
 \alias{nest_paragraphs}
 \title{converts paragraph tokens into line tokens}
 \usage{
-nest_paragraphs(data, input)
+nest_paragraphs(data, input, ...)
 }
 \arguments{
 \item{data}{data.frame. With one paragraph per row.}
 
 \item{input}{column that gets split as string or symbol.}
+
+\item{...}{Extra arguments passed to str_wrap.}
 }
 \value{
 data.frame.

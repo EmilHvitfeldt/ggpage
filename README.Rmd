@@ -14,6 +14,10 @@ knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, message = FALSE,
 
 `ggpage` is a package to create pagestyled visualizations of text based data. It uses ggplot2 and final returns are ggplot2 objects.
 
+## Version 0.2.0
+
+In this new version I have worked to include a lot of use cases that wasn't available in the first version. These new elements are previewed in the vignette.
+
 ## Installation
 
 You can install ggpage from github with:

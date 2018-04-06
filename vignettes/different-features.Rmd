@@ -41,15 +41,21 @@ ggpage_build(book, para.fun = rpois, lambda = 500) %>%
 
 ## Show paper
 
+With the newest update `ggpage` allows you to draw a rectangle around each "page". 
+
 ```{r}
 ggpage_build(tinderbox) %>%
   ggpage_plot(paper.show = TRUE)
 ```
 
+It allows you use specify a color both as a constant,
+
 ```{r}
 ggpage_build(tinderbox) %>%
   ggpage_plot(paper.show = TRUE, paper.color = "pink")
 ```
+
+or by a string of colors. In this case a faded rainbow.
 
 ```{r}
 ggpage_build(tinderbox) %>%
@@ -57,6 +63,8 @@ ggpage_build(tinderbox) %>%
 ```
 
 ## Show page number
+
+It can be hard to see the order of the pages in the standard vizualization. However it is possible to add a page number in the sides or corners of each page.
 
 ```{r}
 directions <- c("top", "top-right", "right", "bottom-right", "bottom",
@@ -80,18 +88,20 @@ ggpage_build(tinderbox) %>%
 
 ```
 
-
-
 ## Variable page length
+
+The package also support a variable page length. This can be helpful when a collection of smaller texts are considered in the same vizualisation such as tweets.
 
 ```{r}
 tinderbox %>%
-  mutate(hey = ceiling(seq_len(nrow(tinderbox)) / 10)) %>%
-  ggpage_build(page.col = "hey", lpp = 10) %>%
+  mutate(short = ceiling(seq_len(nrow(tinderbox)) / 10)) %>%
+  ggpage_build(page.col = "short", lpp = 10) %>%
   ggpage_plot()
 ```
 
 ## Centering
+
+`ggpage` now supports left, right and both-sided alignments.
 
 ```{r}
 ggpage_build(tinderbox, align = "right") %>%
@@ -103,8 +113,14 @@ ggpage_build(tinderbox, align = "both") %>%
 
 ## Paragraph to line
 
+Lastly for convience does `ggpage` include a way to transform a data.frame with paragraph tokens to a data.frame with line tokens.
+
 ```{r}
-nest_paragraphs(tinderbox_paragraph, text)
+nest_paragraphs(tinderbox_paragraph, text) %>%
+  head()
+
+nest_paragraphs(tinderbox_paragraph, text, width = 40) %>%
+  head()
 ```
 
 
