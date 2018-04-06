@@ -23,6 +23,7 @@
 #'   with full lines. (defaults to FALSE).
 #' @param para.fun Function that generates random numbers to determine number
 #'  of word in each paragraph.
+#' @param page.col column to split the pages by.
 #' @param ... Extra arguments.
 #' @return `data.frame` containing the following columns:
 #'
@@ -76,11 +77,13 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                          vertical_space = 1, x_space_pages = 10,
                          y_space_pages = 10, nrow = NULL, ncol = NULL,
                          bycol = TRUE, wtl = FALSE,
-                         para.fun = NULL, ...) {
+                         para.fun = NULL, page.col = NULL, ...) {
 
   if(!any(class(book) %in% c("character", "data.frame"))) {
     stop("Please supply character string or data.frame.")
   }
+
+  book0 <- book
 
   # Makes strings to data.frames
   if (inherits(book, "character")) {
@@ -102,7 +105,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     if (is.null(para.fun)) {
       book <- data.frame(text = word_to_line(book), stringsAsFactors = FALSE)
     } else {
-      if(!is.function(para.fun)) stop("wtl must be a function")
+      if(!is.function(para.fun)) stop("para.fun must be a function")
 
       book <- book %>%
         dplyr::mutate(paragraph_id = para_index(NROW(book), para.fun, ...) %>%
@@ -118,11 +121,21 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
   }
 
   # Data table with full lines needed here
-  data <- book %>%
-    dplyr::mutate(index_line = 1:NROW(book),
-                  page = rep(1:ceiling(NROW(book) / lpp),
-                             length.out = NROW(book),
-                             each = lpp)) %>%
+  if (is.null(page.col)) {
+    data <- book %>%
+      dplyr::mutate(index_line = 1:NROW(book),
+                    page = rep(1:ceiling(NROW(book) / lpp),
+                               length.out = NROW(book),
+                               each = lpp))
+  } else {
+    page.col <- rlang::quo_name(rlang::enquo(page.col))
+
+    data <- book %>%
+      dplyr::mutate(index_line = 1:NROW(book),
+                    page = book0[[page.col]])
+  }
+
+  data <- data %>%
     page_liner() %>%
     tidytext::unnest_tokens(output = "word", input = "text") %>%
     dplyr::mutate(word_length = stringr::str_length(.data$word)) %>%

@@ -6,7 +6,7 @@
 \usage{
 ggpage_build(book, lpp = 25, character_height = 3, vertical_space = 1,
   x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE, wtl = FALSE, para.fun = NULL, ...)
+  bycol = TRUE, wtl = FALSE, para.fun = NULL, page.col = NULL, ...)
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a
@@ -37,6 +37,8 @@ with full lines. (defaults to FALSE).}
 
 \item{para.fun}{Function that generates random numbers to determine number
 of word in each paragraph.}
+
+\item{page.col}{column to split the pages by.}
 
 \item{...}{Extra arguments.}
 }

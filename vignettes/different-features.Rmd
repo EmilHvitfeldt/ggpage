@@ -80,3 +80,14 @@ ggpage_build(tinderbox) %>%
 ```
 
 
+
+### Variable page length
+
+```{r}
+tinderbox %>%
+  mutate(hey = ceiling(seq_len(nrow(tinderbox)) / 10)) %>%
+  ggpage_build(page.col = "hey", lpp = 10) %>%
+  ggpage_plot()
+```
+```
+
