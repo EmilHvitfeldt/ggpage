@@ -116,12 +116,13 @@ ggpage_build(tinderbox, align = "both") %>%
 Lastly for convience does `ggpage` include a way to transform a data.frame with paragraph tokens to a data.frame with line tokens.
 
 ```{r}
-nest_paragraphs(tinderbox_paragraph, text) %>%
+nest_paragraphs(data = tinderbox_paragraph, input = text) %>%
   head()
 
 nest_paragraphs(tinderbox_paragraph, text, width = 40) %>%
   head()
 ```
+
 
 
 
