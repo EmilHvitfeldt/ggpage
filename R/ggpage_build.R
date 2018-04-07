@@ -5,6 +5,8 @@
 #' construction and plotting we are able to do intermediate analysis which
 #' can be included in the visualization.
 #'
+#' The text MUST be presented in a column named text.
+#'
 #' @param book Character or data.frame. Can either have each element be a
 #'   seperate line or having each element being seperate words.
 #' @param lpp Numeric. Lines Per Page. Number of lines allocated for each page.
@@ -163,12 +165,12 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     dplyr::n_distinct()
 
   if (!is.null(nrow) || !is.null(ncol)) {
-    if (!is.null(ncol)) {
-      n_row_y <- ncol
+    if (!is.null(nrow)) {
+      n_row_y <- nrow
       n_row_x <- ceiling(num_pages / n_row_y)
     }
-    if (!is.null(nrow)) {
-      n_row_x <- nrow
+    if (!is.null(ncol)) {
+      n_row_x <- ncol
       n_row_y <- ceiling(num_pages / n_row_x)
     }
   } else {

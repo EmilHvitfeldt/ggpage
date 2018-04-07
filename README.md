@@ -51,7 +51,7 @@ The basic workflow with ggpage is using either
 -   `ggpage_quick` for a quick one function call plot or,
 -   combining `ggpage_build` and `ggpage_plot` to do analysis (NLP for example) before the final plot is produced.
 
-For a simple demonstration we apply `ggpage_quick` to our `tinderbox` object.
+For a simple demonstration we apply `ggpage_quick` to our `tinderbox` object. It is important that the data.frame that is used have the text in a column named "text".
 
 ``` r
 ggpage_quick(tinderbox)

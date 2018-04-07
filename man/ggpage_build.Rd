@@ -69,6 +69,9 @@ same result as \code{ggpage_quick}. However by splitting the data.frame
 construction and plotting we are able to do intermediate analysis which
 can be included in the visualization.
 }
+\details{
+The text MUST be presented in a column named text.
+}
 \examples{
 \dontrun{
 library(tidyverse)
