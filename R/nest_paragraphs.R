@@ -21,7 +21,7 @@ nest_paragraphs <- function(data, input, ...) {
                     bind_rows(
                       replicate(
                         length(sections[[.x]]),
-                        dplyr::select(data, -quo_input)[.x, ],
+                        dplyr::select(data, -which(names(data) == quo_input))[.x, ],
                         simplify = FALSE)
                       )
                     )

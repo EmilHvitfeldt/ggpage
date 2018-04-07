@@ -122,8 +122,3 @@ nest_paragraphs(data = tinderbox_paragraph, input = text) %>%
 nest_paragraphs(tinderbox_paragraph, text, width = 40) %>%
   head()
 ```
-
-
-
-
-
