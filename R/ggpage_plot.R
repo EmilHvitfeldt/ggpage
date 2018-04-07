@@ -104,7 +104,7 @@ ggpage_plot <- function(data, mapping = ggplot2::aes(),
     }
 
     p <- p +
-      ggplot2::geom_text(data = paper_number_data,
+      ggplot2::geom_text(data = paper_number_data, inherit.aes = FALSE,
                          ggplot2::aes(x = page_x, y = page_y,
                                       label = paper_number_data$page))
   }
