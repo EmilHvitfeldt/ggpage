@@ -11,15 +11,14 @@
 word_to_line <- function(words, wot_number = 1000) {
 
   words %>%
-    dplyr::mutate(split = rep(1:ceiling(NROW(words) / wot_number),
-                              by = wot_number,
-                              length.out = NROW(words))) %>%
+    dplyr::mutate(split = floor((seq_len(NROW(words)) - 1L) / wot_number)) %>%
     split(.$split) %>%
     purrr::map(~ .x %>% dplyr::pull(.data$text) %>%
           stringr::str_c(collapse = " ") %>%
           stringr::str_wrap() %>%
           stringr::str_split("\n *")) %>%
     unlist()
+
 }
 
 #' paragraph split
