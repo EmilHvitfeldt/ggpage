@@ -1,12 +1,12 @@
 #' Internal function for converting words to lines
 #'
-#' extents the str_wrap() function from the stringr pacakge to work with longer
+#' extents the str_wrap() function from the stringr package to work with longer
 #' strings.
 #'
-#' @param words data.frame. Where each row is a seperate word words with the
+#' @param words data.frame. Where each row is a separate word words with the
 #'   column name text.
 #' @param wot_number Numeric. how many words to split whole string by.
-#' @return Character. have each element be a seperate line.
+#' @return Character. have each element be a separate line.
 #' @export
 word_to_line <- function(words, wot_number = 1000) {
 
@@ -60,7 +60,7 @@ break_help <- function(x) {
   )
 }
 
-#' Identify the egdes of the paper of each page
+#' Identify the edges of the paper of each page
 #'
 #' @param data data.frame created by ggpage_build.
 #' @return data.frame,

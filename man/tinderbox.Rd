@@ -7,7 +7,7 @@
 \format{A data frame with 211 rows and 2 variables:
 \describe{
   \item{text}{character string up to 80 characters each}
-  \item{book}{nam of the fairy tale}
+  \item{book}{name of the fairy tale}
   ...
 }}
 \usage{

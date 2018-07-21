@@ -7,15 +7,15 @@
 word_to_line(words, wot_number = 1000)
 }
 \arguments{
-\item{words}{data.frame. Where each row is a seperate word words with the
+\item{words}{data.frame. Where each row is a separate word words with the
 column name text.}
 
 \item{wot_number}{Numeric. how many words to split whole string by.}
 }
 \value{
-Character. have each element be a seperate line.
+Character. have each element be a separate line.
 }
 \description{
-extents the str_wrap() function from the stringr pacakge to work with longer
+extents the str_wrap() function from the stringr package to work with longer
 strings.
 }

@@ -10,7 +10,7 @@ ggpage_quick(book, lpp = 25, character_height = 3, vertical_space = 1,
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a
-seperate line or having each element being seperate words.}
+separate line or having each element being separate words.}
 
 \item{lpp}{Numeric. Lines Per Page. Number of lines allocated for each page.}
 
@@ -19,9 +19,9 @@ compared to its width.}
 
 \item{vertical_space}{Numeric. Distance between each lines vertically.}
 
-\item{x_space_pages}{Numeric. Distence between pages along the x-axis.}
+\item{x_space_pages}{Numeric. Distance between pages along the x-axis.}
 
-\item{y_space_pages}{Numeric. Distence between pages along the y-axis.}
+\item{y_space_pages}{Numeric. Distance between pages along the y-axis.}
 
 \item{nrow}{Numeric. Number of rows of pages, if omitted defaults to square
 layout.}

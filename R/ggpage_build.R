@@ -8,13 +8,13 @@
 #' The text MUST be presented in a column named text.
 #'
 #' @param book Character or data.frame. Can either have each element be a
-#'   seperate line or having each element being seperate words.
+#'   separate line or having each element being separate words.
 #' @param lpp Numeric. Lines Per Page. Number of lines allocated for each page.
 #' @param character_height Numeric. Relative size of the height of each letter
 #'   compared to its width.
 #' @param vertical_space Numeric. Distance between each lines vertically.
-#' @param x_space_pages Numeric. Distence between pages along the x-axis.
-#' @param y_space_pages Numeric. Distence between pages along the y-axis.
+#' @param x_space_pages Numeric. Distance between pages along the x-axis.
+#' @param y_space_pages Numeric. Distance between pages along the y-axis.
 #' @param nrow Numeric. Number of rows of pages, if omitted defaults to square
 #'   layout.
 #' @param ncol Numeric. Number of columns of pages, if omitted defaults to

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{paper_shape}
 \alias{paper_shape}
-\title{Identify the egdes of the paper of each page}
+\title{Identify the edges of the paper of each page}
 \usage{
 paper_shape(data)
 }
@@ -13,7 +13,7 @@ paper_shape(data)
 data.frame,
 }
 \description{
-Identify the egdes of the paper of each page
+Identify the edges of the paper of each page
 }
 \examples{
 paper_shape(ggpage_build(tinderbox))

@@ -4,12 +4,12 @@
 #'   optional intermediate analysis.
 #' @param mapping Default list of aesthetic mappings to use for plot to be
 #'   handed to internal \code{ggplot} call.
-#' @param paper.show Shows the paper underneigt the text.
+#' @param paper.show Shows the paper underneath the text.
 #' @param paper.color Color of the pages. Needs to be of length 1 or the same
 #'   as the number of pages.
 #' @param paper.alpha Alpha of the pages. Needs to be of length 1 or the same
 #'   as the number of pages.
-#' @param paper.limits Numerical.Extends the egdes of the paper in all
+#' @param paper.limits Numerical. Extends the edges of the paper in all
 #'   directions.
 #' @param page.number Position of the page number. Defaults to none.
 #' @param page.number.x Distance the page number is pushed away from the text

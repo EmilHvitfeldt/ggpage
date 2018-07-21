@@ -1,6 +1,6 @@
 #' converts paragraph tokens into line tokens
 #'
-#' extents the str_wrap() function from the stringr pacakge to work with longer
+#' extents the str_wrap() function from the stringr package to work with longer
 #' strings.
 #'
 #' @param data data.frame. With one paragraph per row.
