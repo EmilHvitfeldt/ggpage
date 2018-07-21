@@ -4,3 +4,5 @@ README.Rmd
 ^\.travis\.yml$
 ^data-raw$
 ^codecov\.yml$
+^cran-comments\.md$
+^appveyor\.yml$
