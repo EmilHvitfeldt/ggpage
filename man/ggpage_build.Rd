@@ -4,10 +4,11 @@
 \alias{ggpage_build}
 \title{Creates a data frame for further analysis and plotting}
 \usage{
-ggpage_build(book, lpp = 25, character_height = 3, vertical_space = 1,
-  x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE, wtl = NULL, para.fun = NULL, page.col = NULL,
-  align = "left", line.max = 80, ...)
+ggpage_build(book, lpp = 25, character_height = 3,
+  vertical_space = 1, x_space_pages = 10, y_space_pages = 10,
+  nrow = NULL, ncol = NULL, bycol = TRUE, wtl = NULL,
+  para.fun = NULL, page.col = NULL, align = "left", line.max = 80,
+  ...)
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a

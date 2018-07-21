@@ -4,9 +4,9 @@
 \alias{ggpage_quick}
 \title{Creates a quick visualization of the page layout}
 \usage{
-ggpage_quick(book, lpp = 25, character_height = 3, vertical_space = 1,
-  x_space_pages = 10, y_space_pages = 10, nrow = NULL, ncol = NULL,
-  bycol = TRUE)
+ggpage_quick(book, lpp = 25, character_height = 3,
+  vertical_space = 1, x_space_pages = 10, y_space_pages = 10,
+  nrow = NULL, ncol = NULL, bycol = TRUE)
 }
 \arguments{
 \item{book}{Character or data.frame. Can either have each element be a
