@@ -41,8 +41,10 @@ A ggplot object with the given visualization.
 Creates a visualization from the ggpage_build output
 }
 \examples{
-\dontrun{
-library(tidyverse)
+\donttest{
+library(dplyr)
+library(stringr)
+library(ggplot2)
 library(tidytext)
 library(ggpage)
 # build and plot

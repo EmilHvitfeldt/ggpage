@@ -74,8 +74,10 @@ can be included in the visualization.
 The text MUST be presented in a column named text.
 }
 \examples{
-\dontrun{
-library(tidyverse)
+\donttest{
+library(dplyr)
+library(stringr)
+library(ggplot2)
 library(tidytext)
 library(ggpage)
 # build and plot

@@ -39,8 +39,10 @@ A ggplot object with the given visualization.
 Creates a quick visualization of the page layout
 }
 \examples{
-\dontrun{
-library(tidyverse)
+\donttest{
+library(dplyr)
+library(stringr)
+library(ggplot2)
 library(tidytext)
 library(ggpage)
 # quick

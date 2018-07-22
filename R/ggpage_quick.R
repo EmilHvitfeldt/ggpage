@@ -16,8 +16,10 @@
 #'   columns, otherwise the matrix is filled by rows.
 #' @return A ggplot object with the given visualization.
 #' @examples
-#' \dontrun{
-#' library(tidyverse)
+#' \donttest{
+#' library(dplyr)
+#' library(stringr)
+#' library(ggplot2)
 #' library(tidytext)
 #' library(ggpage)
 #' # quick
