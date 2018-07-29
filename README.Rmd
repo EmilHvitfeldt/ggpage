@@ -1,10 +1,12 @@
 ---
-output: rmarkdown::github_document
+output: github_document
 ---
-```{r, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, message = FALSE, 
-                      warning = FALSE, error = FALSE, fig.retina = 2,
-                      fig.path = "man/figures/README-")
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
 ```
 
 # ggpage
@@ -39,7 +41,7 @@ devtools::install_github("EmilHvitfeldt/ggpage")
 
 The package includes The Tinder-box by H.C. Andersen for examples.
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 library(ggpage)
 
@@ -83,7 +85,7 @@ tinderbox %>%
 
 And it will work nicely with other tidyverse packages
 
-```{r}
+```{r readmegif, message=FALSE}
 library(ggpage)
 library(purrr)
 library(gganimate)
