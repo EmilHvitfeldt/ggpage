@@ -135,3 +135,31 @@ midbuild %>%
 ```
 
 ![](man/figures/README-readmegif-1.gif)<!-- -->
+
+``` r
+library(paletteer)
+sentiment_types <- sentiments %>%
+  filter(lexicon == "nrc") %>%
+  pull(sentiment) %>%
+  unique()
+
+prebuild <- imap_dfr(sentiment_types,
+  ~ ggpage_build(tinderbox) %>%
+  left_join(filter(get_sentiments("nrc"), sentiment == .x), by = "word") %>%
+    mutate(sentiment_state = .x,
+           score = as.numeric(!is.na(sentiment)),
+           score_smooth = zoo::rollmean(score, 5, 0)))
+
+prebuild %>% 
+  ggpage_plot(aes(fill = score_smooth), page.number = "top-left") +
+  paletteer::scale_fill_paletteer_c(ggthemes, `Purple Sequential`) +
+  guides(fill = "none") +
+  transition_states(
+    sentiment_state,
+    transition_length = 10,
+    state_length = 3
+    ) +
+  labs(title = "Sections with a sentiment of {closest_state}\nIn H.C. Andersen's Tinderbox")
+```
+
+![](man/figures/README-unnamed-chunk-7-1.gif)<!-- -->
