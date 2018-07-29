@@ -7,6 +7,8 @@ status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://t
 status](https://ci.appveyor.com/api/projects/status/github/EmilHvitfeldt/ggpage?branch=master&svg=true)](https://ci.appveyor.com/project/EmilHvitfeldt/ggpage)
 [![Coverage
 status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg)](https://codecov.io/github/EmilHvitfeldt/ggpage?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggpage)](https://cran.r-project.org/package=ggpage)
 
 `ggpage` is a package to create pagestyled visualizations of text based
 data. It uses ggplot2 and final returns are ggplot2 objects.
@@ -19,7 +21,14 @@ in the vignette.
 
 ## Installation
 
-You can install ggpage from github with:
+You can install the released version of ggpage from
+[CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("paletteer")
+```
+
+or you can install the developmental version of ggpage from github with:
 
 ``` r
 # install.packages("devtools")
@@ -64,7 +73,7 @@ in a column named “text”.
 ggpage_quick(tinderbox)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="672" />
 
 ``` r
 
@@ -95,7 +104,7 @@ tinderbox %>%
                     name = "Word length")
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="672" />
 
 And it will work nicely with other tidyverse packages
 
@@ -103,6 +112,8 @@ And it will work nicely with other tidyverse packages
 library(ggpage)
 library(purrr)
 library(gganimate)
+library(tidytext)
+library(zoo)
 
 prebuild <- tinderbox %>%
   ggpage_build() %>%
@@ -115,13 +126,10 @@ midbuild <- map_df(.x = 0:50 * 10 + 1,
                            score_smooth = score_smooth / max(score_smooth),
                            rolls = .x))
 
-p <- midbuild %>%
-  ggpage_plot(aes(fill = score_smooth, frame = rolls)) +
+midbuild %>%
+  ggpage_plot(aes(fill = score_smooth)) +
   scale_fill_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 0) +
   guides(fill = "none") +
-  labs(title = "Smoothed sentiment of The Tinder-box, rolling average of")
-
-gganimate(p, interval = .2)
+  labs(title = "Smoothed sentiment of The Tinder-box, rolling average of {round(frame_time)}") +
+  transition_time(rolls)
 ```
-
-![](man/figures/README-gif.gif)

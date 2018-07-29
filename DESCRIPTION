@@ -1,7 +1,7 @@
 Package: ggpage
 Type: Package
 Title: Creates Page Layout Visualizations
-Version: 0.2.2
+Version: 0.2.2.9000
 Authors@R: person("Emil", "Hvitfeldt", email = "emilhhvitfeldt@gmail.com", role = c("aut", "cre"))
 Description: Facilitates the creation of page layout visualizations in which
     words are represented as rectangles with sizes relating to the length of 

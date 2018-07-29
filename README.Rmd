@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, message = FALSE,
 [![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/EmilHvitfeldt/ggpage?branch=master&svg=true)](https://ci.appveyor.com/project/EmilHvitfeldt/ggpage)
 [![Coverage status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg)](https://codecov.io/github/EmilHvitfeldt/ggpage?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/ggpage)](https://cran.r-project.org/package=ggpage)
 
 `ggpage` is a package to create pagestyled visualizations of text based data. It uses ggplot2 and final returns are ggplot2 objects.
 
@@ -21,7 +22,13 @@ In this new version I have worked to include a lot of use cases that wasn't avai
 
 ## Installation
 
-You can install ggpage from github with:
+You can install the released version of ggpage from [CRAN](https://cran.r-project.org/) with:
+
+```{r eval = FALSE}
+install.packages("paletteer")
+```
+
+or you can install the developmental version of ggpage from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
@@ -76,10 +83,12 @@ tinderbox %>%
 
 And it will work nicely with other tidyverse packages
 
-```{r eval=FALSE}
+```{r}
 library(ggpage)
 library(purrr)
 library(gganimate)
+library(tidytext)
+library(zoo)
 
 prebuild <- tinderbox %>%
   ggpage_build() %>%
@@ -92,12 +101,10 @@ midbuild <- map_df(.x = 0:50 * 10 + 1,
                            score_smooth = score_smooth / max(score_smooth),
                            rolls = .x))
 
-p <- midbuild %>%
-  ggpage_plot(aes(fill = score_smooth, frame = rolls)) +
+midbuild %>%
+  ggpage_plot(aes(fill = score_smooth)) +
   scale_fill_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 0) +
   guides(fill = "none") +
-  labs(title = "Smoothed sentiment of The Tinder-box, rolling average of")
-
-gganimate(p, interval = .2)
+  labs(title = "Smoothed sentiment of The Tinder-box, rolling average of {round(frame_time)}") +
+  transition_time(rolls)
 ```
-![](man/figures/README-gif.gif)
