@@ -27,7 +27,7 @@ In this new version I have worked to include a lot of use cases that wasn't avai
 You can install the released version of ggpage from [CRAN](https://cran.r-project.org/) with:
 
 ```{r eval = FALSE}
-install.packages("paletteer")
+install.packages("ggpage")
 ```
 
 or you can install the developmental version of ggpage from github with:
