@@ -10,8 +10,8 @@ status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggpage)](https://cran.r-project.org/package=ggpage)
 
-`ggpage` is a package to create pagestyled visualizations of text based
-data. It uses ggplot2 and final returns are ggplot2 objects.
+**ggpage** is a package to create pagestyled visualizations of text
+based data. It uses ggplot2 and final returns are ggplot2 objects.
 
 ## Version 0.2.0
 
@@ -21,14 +21,15 @@ in the vignette.
 
 ## Installation
 
-You can install the released version of ggpage from
+You can install the released version of **ggpage** from
 [CRAN](https://cran.r-project.org/) with:
 
 ``` r
 install.packages("ggpage")
 ```
 
-or you can install the developmental version of ggpage from github with:
+or you can install the developmental version of **ggpage** from github
+with:
 
 ``` r
 # install.packages("devtools")
@@ -59,7 +60,7 @@ head(tinderbox, 10)
 #> 10 "beside them. \"Well, it is quite hollow inside, and you … The tinder-…
 ```
 
-The basic workflow with ggpage is using either
+The basic workflow with **ggpage** is using either
 
   - `ggpage_quick` for a quick one function call plot or,
   - combining `ggpage_build` and `ggpage_plot` to do analysis (NLP for
