@@ -1,29 +1,36 @@
-Package: ggpage
 Type: Package
+Package: ggpage
 Title: Creates Page Layout Visualizations
 Version: 0.2.2.9000
-Authors@R: person("Emil", "Hvitfeldt", email = "emilhhvitfeldt@gmail.com", role = c("aut", "cre"))
-Description: Facilitates the creation of page layout visualizations in which
-    words are represented as rectangles with sizes relating to the length of 
-    the words. Which then is divided in lines and pages for easy overview of 
-    up to quite large texts.
+Authors@R: 
+    person(given = "Emil",
+           family = "Hvitfeldt",
+           role = c("aut", "cre"),
+           email = "emilhhvitfeldt@gmail.com")
+Description: Facilitates the creation of page layout
+    visualizations in which words are represented as rectangles with sizes
+    relating to the length of the words. Which then is divided in lines
+    and pages for easy overview of up to quite large texts.
+License: MIT + file LICENSE
+URL: https://github.com/EmilHvitfeldt/ggpage
+BugReports: https://github.com/EmilHvitfeldt/ggpage/issues
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.0.0)
 Imports: 
     dplyr,
     ggplot2 (>= 2.0.0),
-    stringr,
-    tidytext (>= 0.1.0),
     magrittr,
     purrr,
-    rlang
-License: MIT + file LICENSE
+    rlang,
+    stringr,
+    tidytext (>= 0.1.0)
+Suggests: 
+    covr,
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: 
-    testthat,
-    knitr,
-    rmarkdown,
-    covr
-VignetteBuilder: knitr
