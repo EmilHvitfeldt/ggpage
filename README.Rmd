@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggpage
+# ggpage <img src='man/figures/logo.png' align="right" height="139" />
 
 [![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/EmilHvitfeldt/ggpage?branch=master&svg=true)](https://ci.appveyor.com/project/EmilHvitfeldt/ggpage)
@@ -127,7 +127,7 @@ prebuild <- imap_dfr(sentiment_types,
 
 prebuild %>% 
   ggpage_plot(aes(fill = score_smooth), page.number = "top-left") +
-  paletteer::scale_fill_paletteer_c(ggthemes, `Purple Sequential`) +
+  paletteer::scale_fill_paletteer_c(viridis, cividis, direction = -1) +
   guides(fill = "none") +
   transition_states(
     sentiment_state,
