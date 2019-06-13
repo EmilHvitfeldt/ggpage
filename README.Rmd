@@ -98,42 +98,15 @@ prebuild <- tinderbox %>%
 
 midbuild <- map_df(.x = 0:50 * 10 + 1,
                    ~ prebuild %>% 
-                    mutate(score = ifelse(is.na(score), 0, score), 
-                           score_smooth = zoo::rollmean(score, .x, 0),
-                           score_smooth = score_smooth / max(score_smooth),
+                    mutate(value = ifelse(is.na(value), 0, value), 
+                           value_smooth = zoo::rollmean(value, .x, 0),
+                           value_smooth = value_smooth / max(value_smooth),
                            rolls = .x))
 
 midbuild %>%
-  ggpage_plot(aes(fill = score_smooth)) +
+  ggpage_plot(aes(fill = value_smooth)) +
   scale_fill_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 0) +
   guides(fill = "none") +
   labs(title = "Smoothed sentiment of The Tinder-box, rolling average of {round(frame_time)}") +
   transition_time(rolls)
 ```
-
-```{r, message=FALSE}
-library(paletteer)
-sentiment_types <- sentiments %>%
-  filter(lexicon == "nrc") %>%
-  pull(sentiment) %>%
-  unique()
-
-prebuild <- imap_dfr(sentiment_types,
-  ~ ggpage_build(tinderbox) %>%
-  left_join(filter(get_sentiments("nrc"), sentiment == .x), by = "word") %>%
-    mutate(sentiment_state = .x,
-           score = as.numeric(!is.na(sentiment)),
-           score_smooth = zoo::rollmean(score, 5, 0)))
-
-prebuild %>% 
-  ggpage_plot(aes(fill = score_smooth), page.number = "top-left") +
-  paletteer::scale_fill_paletteer_c(viridis, cividis, direction = -1) +
-  guides(fill = "none") +
-  transition_states(
-    sentiment_state,
-    transition_length = 10,
-    state_length = 3
-    ) +
-  labs(title = "Sections with a sentiment of {closest_state}\nIn H.C. Andersen's Tinderbox")
-```
-

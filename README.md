@@ -1,39 +1,49 @@
 
-ggpage <img src='man/figures/logo.png' align="right" height="139" />
-====================================================================
+# ggpage <img src='man/figures/logo.png' align="right" height="139" />
 
-[![Travis build status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/EmilHvitfeldt/ggpage?branch=master&svg=true)](https://ci.appveyor.com/project/EmilHvitfeldt/ggpage) [![Coverage status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg)](https://codecov.io/github/EmilHvitfeldt/ggpage?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/ggpage)](https://cran.r-project.org/package=ggpage)
+[![Travis build
+status](https://travis-ci.org/EmilHvitfeldt/ggpage.svg?branch=master)](https://travis-ci.org/EmilHvitfeldt/ggpage)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/EmilHvitfeldt/ggpage?branch=master&svg=true)](https://ci.appveyor.com/project/EmilHvitfeldt/ggpage)
+[![Coverage
+status](https://codecov.io/gh/EmilHvitfeldt/ggpage/branch/master/graph/badge.svg)](https://codecov.io/github/EmilHvitfeldt/ggpage?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggpage)](https://cran.r-project.org/package=ggpage)
 
-**ggpage** is a package to create pagestyled visualizations of text based data. It uses ggplot2 and final returns are ggplot2 objects.
+**ggpage** is a package to create pagestyled visualizations of text
+based data. It uses ggplot2 and final returns are ggplot2 objects.
 
-Version 0.2.0
--------------
+## Version 0.2.0
 
-In this new version I have worked to include a lot of use cases that wasn't available in the first version. These new elements are previewed in the vignette.
+In this new version I have worked to include a lot of use cases that
+wasn’t available in the first version. These new elements are previewed
+in the vignette.
 
-Installation
-------------
+## Installation
 
-You can install the released version of **ggpage** from [CRAN](https://cran.r-project.org/) with:
+You can install the released version of **ggpage** from
+[CRAN](https://cran.r-project.org/) with:
 
 ``` r
 install.packages("ggpage")
 ```
 
-or you can install the developmental version of **ggpage** from github with:
+or you can install the developmental version of **ggpage** from github
+with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("EmilHvitfeldt/ggpage")
 ```
 
-Example
--------
+## Example
 
 The package includes The Tinder-box by H.C. Andersen for examples.
 
 ``` r
 library(tidyverse)
+#> Warning: replacing previous import 'dplyr::vars' by 'rlang::vars' when
+#> loading 'dbplyr'
 library(ggpage)
 
 head(tinderbox, 10)
@@ -54,16 +64,21 @@ head(tinderbox, 10)
 
 The basic workflow with **ggpage** is using either
 
--   `ggpage_quick` for a quick one function call plot or,
--   combining `ggpage_build` and `ggpage_plot` to do analysis (NLP for example) before the final plot is produced.
+  - `ggpage_quick` for a quick one function call plot or,
+  - combining `ggpage_build` and `ggpage_plot` to do analysis (NLP for
+    example) before the final plot is produced.
 
-For a simple demonstration we apply `ggpage_quick` to our `tinderbox` object. It is important that the data.frame that is used have the text in a column named "text".
+For a simple demonstration we apply `ggpage_quick` to our `tinderbox`
+object. It is important that the data.frame that is used have the text
+in a column named “text”.
 
 ``` r
 ggpage_quick(tinderbox)
+#> Warning: replacing previous import 'dplyr::vars' by 'rlang::vars' when
+#> loading 'tidytext'
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 
@@ -79,7 +94,9 @@ tinderbox %>%
   ggpage_plot()
 ```
 
-But this approach allows us to introduce more code between `ggpage_build` and `ggpage_plot` giving us multiple more ways to enhance the plots
+But this approach allows us to introduce more code between
+`ggpage_build` and `ggpage_plot` giving us multiple more ways to enhance
+the plots
 
 ``` r
 tinderbox %>%
@@ -92,7 +109,7 @@ tinderbox %>%
                     name = "Word length")
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
 
 And it will work nicely with other tidyverse packages
 
@@ -109,45 +126,17 @@ prebuild <- tinderbox %>%
 
 midbuild <- map_df(.x = 0:50 * 10 + 1,
                    ~ prebuild %>% 
-                    mutate(score = ifelse(is.na(score), 0, score), 
-                           score_smooth = zoo::rollmean(score, .x, 0),
-                           score_smooth = score_smooth / max(score_smooth),
+                    mutate(value = ifelse(is.na(value), 0, value), 
+                           value_smooth = zoo::rollmean(value, .x, 0),
+                           value_smooth = value_smooth / max(value_smooth),
                            rolls = .x))
 
 midbuild %>%
-  ggpage_plot(aes(fill = score_smooth)) +
+  ggpage_plot(aes(fill = value_smooth)) +
   scale_fill_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 0) +
   guides(fill = "none") +
   labs(title = "Smoothed sentiment of The Tinder-box, rolling average of {round(frame_time)}") +
   transition_time(rolls)
 ```
 
-![](man/figures/README-readmegif-1.gif)
-
-``` r
-library(paletteer)
-sentiment_types <- sentiments %>%
-  filter(lexicon == "nrc") %>%
-  pull(sentiment) %>%
-  unique()
-
-prebuild <- imap_dfr(sentiment_types,
-  ~ ggpage_build(tinderbox) %>%
-  left_join(filter(get_sentiments("nrc"), sentiment == .x), by = "word") %>%
-    mutate(sentiment_state = .x,
-           score = as.numeric(!is.na(sentiment)),
-           score_smooth = zoo::rollmean(score, 5, 0)))
-
-prebuild %>% 
-  ggpage_plot(aes(fill = score_smooth), page.number = "top-left") +
-  paletteer::scale_fill_paletteer_c(viridis, cividis, direction = -1) +
-  guides(fill = "none") +
-  transition_states(
-    sentiment_state,
-    transition_length = 10,
-    state_length = 3
-    ) +
-  labs(title = "Sections with a sentiment of {closest_state}\nIn H.C. Andersen's Tinderbox")
-```
-
-![](man/figures/README-unnamed-chunk-7-1.gif)
+![](man/figures/README-readmegif-1.gif)<!-- -->

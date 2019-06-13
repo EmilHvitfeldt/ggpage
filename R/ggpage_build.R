@@ -88,7 +88,7 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
                          line.max = 80,
                          ...) {
 
-  if(!any(class(book) %in% c("character", "data.frame"))) {
+  if (!any(class(book) %in% c("character", "data.frame"))) {
     stop("Please supply character string or data.frame.")
   }
 
@@ -107,20 +107,20 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     stringr::str_detect(" ") %>%
     mean() < 0.9
 
-  if(is.null(wtl)) wtl <- single_word_check
+  if (is.null(wtl)) wtl <- single_word_check
 
   if (wtl) {
 
     if (is.null(para.fun)) {
       book <- data.frame(text = word_to_line(book), stringsAsFactors = FALSE)
     } else {
-      if(!is.function(para.fun)) stop("para.fun must be a function")
+      if (!is.function(para.fun)) stop("para.fun must be a function")
 
       book <- book %>%
         dplyr::mutate(paragraph_id = para_index(NROW(book), para.fun, ...) %>%
                                        break_help())
 
-      book <- purrr::map_df(book %>% dplyr::pull(.data$paragraph_id) %>% unique(),
+      book <- purrr::map_df(dplyr::pull(book, .data$paragraph_id) %>% unique(),
                      ~ book %>%
                          dplyr::filter(paragraph_id == .x) %>%
                          word_to_line() %>%
@@ -149,10 +149,11 @@ ggpage_build <- function(book, lpp = 25, character_height = 3,
     tidytext::unnest_tokens(output = "word", input = "text") %>%
     dplyr::mutate(word_length = stringr::str_length(.data$word)) %>%
     dplyr::group_by(.data$index_line) %>%
-    dplyr::mutate(first_word = dplyr::lag(.data$line, default = 0) != .data$line,
-                  x_space_right = cumsum(.data$word_length + 1) - 1,
-                  x_space_left = cumsum(dplyr::lag(.data$word_length + 1,
-                                                   default = 0))) %>%
+    dplyr::mutate(
+      first_word = dplyr::lag(.data$line, default = 0) != .data$line,
+      x_space_right = cumsum(.data$word_length + 1) - 1,
+      x_space_left = cumsum(dplyr::lag(.data$word_length + 1,
+                                       default = 0))) %>%
     dplyr::ungroup()
 
   # Longest line
