@@ -82,31 +82,3 @@ tinderbox %>%
                     labels = c("8 or less", "9 or more"),
                     name = "Word length")
 ```
-
-And it will work nicely with other tidyverse packages
-
-```{r readmegif, message=FALSE}
-library(ggpage)
-library(purrr)
-library(gganimate)
-library(tidytext)
-library(zoo)
-
-prebuild <- tinderbox %>%
-  ggpage_build() %>%
-  left_join(get_sentiments("afinn"), by = "word") 
-
-midbuild <- map_df(.x = 0:50 * 10 + 1,
-                   ~ prebuild %>% 
-                    mutate(value = ifelse(is.na(value), 0, value), 
-                           value_smooth = zoo::rollmean(value, .x, 0),
-                           value_smooth = value_smooth / max(value_smooth),
-                           rolls = .x))
-
-midbuild %>%
-  ggpage_plot(aes(fill = value_smooth)) +
-  scale_fill_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 0) +
-  guides(fill = "none") +
-  labs(title = "Smoothed sentiment of The Tinder-box, rolling average of {round(frame_time)}") +
-  transition_time(rolls)
-```
